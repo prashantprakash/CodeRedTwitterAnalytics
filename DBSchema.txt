@@ -1,0 +1,19 @@
+User Document 
+	-user_id
+	-twitter_id
+	-location : {logitude , latitude}
+	-verified account
+
+Tweet Document 
+	- tweet_id
+	- tweet_content
+	- hashTags:[] 
+	- posted_time
+	- retweet_count
+	- likes_count
+	- linked_users  
+	- conversation_id ? check if its required 
+	- sentiments: 
+	- published_user 
+
+
