@@ -1,0 +1,9 @@
+import requests
+
+payload = {'apikey': 'eedc4e9599afacc062424aadf6f825bf4c313bf4','text':'Larry Page', 'outputMode': 'json', 'showSourceText' :'1'}
+ 
+r = requests.post("http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment", params=payload)
+
+print(r.url)
+print(r.json())
+
