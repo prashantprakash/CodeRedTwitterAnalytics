@@ -29,6 +29,7 @@
 <script type="text/javascript" src="js/jqplot.canvasAxisTickRenderer.min.js"></script>
 <script type="text/javascript" src="js/FlexGauge.js"></script>
 <script type="text/javascript" src="js/jqplot.pieRenderer.min.js"></script>
+<script src="js/jquery.awesomeCloud-0.2.js"></script>
 <!--  <script type="text/javascript" src="js/jqplot.pointLabels.min.js"></script>-->
 <!-- Custom CSS -->
 <link href="css/sb-admin.css" rel="stylesheet">
@@ -54,11 +55,39 @@
                 top: 100px;
                 width: 100%;
             }
+
+            .wordcloud {
+border: 1px solid #036;
+height: 300px;
+padding: 0;
+page-break-after: always;
+page-break-inside: avoid;
+width: 300px;
+
+}
  </style>
 
 <script type="text/javascript">
 
     $(document).ready(function(){
+
+
+    $("#wordcloud1").awesomeCloud({
+                    "size" : {
+                        "grid" : 1,
+                        "factor" : 3
+                    },
+                    "color" : {
+                        "background" : "#036"
+                    },
+                    "options" : {
+                        "color" : "random-light",
+                        "rotationRatio" : 0.5,
+                        "printMultiplier" : 3
+                    },
+                    "font" : "'Times New Roman', Times, serif",
+                    "shape" : "star"
+                });
     var hashtag = "#Samsung";
     // $.getJSON( "topkusers/hashtag="+hashtag, function( data ) {
 
@@ -527,7 +556,7 @@ function plotPieChart(chart,pieticks) {
                         <div class="panel panel-green">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
-                                    <i class="fa fa-clock-o fa-fw"></i> Sentime
+                                    <i class="fa fa-clock-o fa-fw"></i> Sentiments
                                 </h3>
                             </div>
                             <div class="panel-body">
@@ -541,12 +570,14 @@ function plotPieChart(chart,pieticks) {
                         <div class="panel panel-green">
                             <div class="panel-heading">
                                 <h3 class="panel-title">
-                                    <i class="fa fa-clock-o fa-fw"></i> Last 6 Months
+                                    <i class="fa fa-clock-o fa-fw"></i> Topics Cloud
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <div id="chartlast6months">
-                                      
+                                <div id="words">
+                                        <div id="wordcloud1" class="wordcloud">
+                                            <span data-weight="9">quisqu</span><span data-weight="27">egesta</span><span data-weight="38">puru</span><span data-weight="43">risu</span><span data-weight="20">ultrici</span><span data-weight="19">sodal</span><span data-weight="26">matti</span><span data-weight="31">ornar</span><span data-weight="16">dignissim</span><span data-weight="27">lacu</span> 
+                                        </div>
                                     
                                 </div>
                             </div>
