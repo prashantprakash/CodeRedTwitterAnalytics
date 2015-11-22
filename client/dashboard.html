@@ -30,6 +30,8 @@
 <script type="text/javascript" src="js/FlexGauge.js"></script>
 <script type="text/javascript" src="js/jqplot.pieRenderer.min.js"></script>
 <script src="js/jquery.awesomeCloud-0.2.js"></script>
+ <script src="https://maps.googleapis.com/maps/api/js"></script>
+
 <!--  <script type="text/javascript" src="js/jqplot.pointLabels.min.js"></script>-->
 <!-- Custom CSS -->
 <link href="css/sb-admin.css" rel="stylesheet">
@@ -68,9 +70,50 @@ width: 300px;
  </style>
 
 <script type="text/javascript">
+var map;
 
+function initialize() {
+  var mapOptions = {
+    zoom: 2,
+    center: {lat: -33.865427, lng: 151.196123},
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  };
+
+  map = new google.maps.Map(document.getElementById('map'),
+      mapOptions);
+
+  // Create a <script> tag and set the USGS URL as the source.
+  var script = document.createElement('script');
+
+  script.src = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp';
+  document.getElementsByTagName('head')[0].appendChild(script);
+
+  map.data.setStyle(function(feature) {
+    var magnitude = feature.getProperty('mag');
+    return {
+      icon: getCircle(magnitude)
+    };
+  });
+}
+
+function getCircle(magnitude) {
+  var circle = {
+    path: google.maps.SymbolPath.CIRCLE,
+    fillColor: 'red',
+    fillOpacity: .2,
+    scale: Math.pow(2, magnitude) / 2,
+    strokeColor: 'white',
+    strokeWeight: .5
+  };
+  return circle;
+}
+
+function eqfeed_callback(results) {
+  map.data.addGeoJson(results);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
     $(document).ready(function(){
-
 
     $("#wordcloud1").awesomeCloud({
                     "size" : {
@@ -474,7 +517,7 @@ function plotPieChart(chart,pieticks) {
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <div id="chartheat" style="margin-left:24%;">
+                                <div id="map" style="margin-left:24%;width:500px;height:500px">
                                        
                                 </div>
                             </div>
